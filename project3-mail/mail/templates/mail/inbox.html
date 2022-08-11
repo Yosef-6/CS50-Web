@@ -1,0 +1,117 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+   
+<div class="container-lg m-3">
+    <div class="row">
+      <div class="col-11">
+       <h2>{{ request.user.email}}</h2>
+      </div>
+      <div class="col-1">
+         <a class="btn btn-md btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
+      </div>
+    </div>
+    <div class="row p-3 mt-2">
+     <ul class="nav nav-tabs mb-3" id="menuTab" role="tablist">
+         <li class="nav-item" role="presentation">
+           <button
+             class="nav-link active"
+             id   ="inbox"
+             type="button"
+             role="tab"
+             aria-selected="true"
+           >
+             Inbox
+           </button>
+         </li>
+         <li class="nav-item" role="presentation">
+           <button
+             class="nav-link"
+             id   ="compose"
+             type="button"
+             role="tab"
+             aria-selected=""
+           >
+             Compose
+           </button>
+         </li>
+         <li class="nav-item" role="presentation">
+           <button
+             class="nav-link"
+             id   ="sent"
+             type="button"
+             role="tab"
+             aria-selected=""
+           >
+             Sent
+           </button>
+         </li>
+         <li class="nav-item" role="presentation">
+           <button
+             class="nav-link"
+             id   ="archived"
+             type="button"
+             role="tab"
+             aria-selected=""
+           >
+             Archived
+           </button>
+         </li>
+       </ul>
+    </div>
+  <div class="row">
+
+    <div id="emails-view">
+      
+
+    </div>
+
+    <div id="email-view">
+    <ul style="list-style: none; margin-left:0px;">
+       <li id="from" class="fw-bold"><span>From :</span></li>
+       <li id="to" class="fw-bold"><span>To :</span></li>
+       <li id="subject" class="fw-bold"><span>Subject :</span></li>
+       <li id="timestamp" class="fw-bold"><span>Timestamp :</span></li>
+    </ul>
+       <p style="margin-left:32px;"><button class="btn btn-sm btn-outline-primary" id="Reply">Reply</button> <span class="ms-3"><button class="btn btn-sm btn-outline-primary ms-3" id="Archive">Archive</button></span></p>
+    <hr/>
+    <h3 class="mb-3" style="margin-left:32px;">Body</h3>
+    <div id="body" style="margin-left:32px;"> </div>
+    </div>
+    <div id="compose-view">
+        <h3 class="mb-3">New Email</h3>
+        <div id="info" class="alert alert-danger" role="alert"></div>
+        <form id="compose-form">
+            <div class="form-group mb-3">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group mb-3">
+                To: <input id="compose-recipients" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control mb-3" rows="8" id="compose-body" placeholder="Body"></textarea>
+            <input type="submit" class="btn btn-primary mb-3"/>
+        </form>
+     </div>
+    </div>
+
+
+
+
+
+ </div>
+
+{% endblock body%}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}
+
+
+
+
+
+
