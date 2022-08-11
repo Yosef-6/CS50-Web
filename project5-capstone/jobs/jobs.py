@@ -7,8 +7,8 @@ user_configs_everything = Configuration.objects.all().filter(active = True, opti
 user_configs_headlines  = Configuration.objects.all().filter(active= True,option = Configuration.Topheadlines)
 url_headlines           = 'https://newsapi.org/v2/top-headlines'
 url_everything          = 'https://newsapi.org/v2/everything'
-payload_everything      = {'q':'','searchIn':'','sources':'','language':'','page':'1','pageSize':'10','sortBy':'relevancy','from':f'{datetime.now().__str__().split(" ")[0]}','apiKey':'6d5e547cb95447b2942c67926cbfd113'}
-payload_headlines       = {'q':'','country':'','category':'','sources':'','page':'1','from':f'{datetime.now().__str__().split(" ")[0]}','pageSize':'10','apiKey':'6d5e547cb95447b2942c67926cbfd113'}
+payload_everything      = {'q':'','searchIn':'','sources':'','language':'','page':'1','pageSize':'10','sortBy':'relevancy','from':f'{datetime.now().__str__().split(" ")[0]}','apiKey':'insert ur news api key here'}
+payload_headlines       = {'q':'','country':'','category':'','sources':'','page':'1','from':f'{datetime.now().__str__().split(" ")[0]}','pageSize':'10','apiKey':'insert ur news api key here'}
 response_article = {}
 def job():
     for user_e in user_configs_everything:
