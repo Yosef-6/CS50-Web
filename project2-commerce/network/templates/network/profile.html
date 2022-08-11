@@ -1,0 +1,31 @@
+{% extends "network/index.html" %}
+{% load static%}
+{% block profile %}
+<div class="row">
+    <div class="card-body">
+        <div class="d-flex flex-start align-items-center">
+            <img class="rounded-circle" src="https://avatars.dicebear.com/api/{{userProfile.avatar}}/{{userProfile.seed}}.svg" width="175" height="175" style="margin-left:11px">
+              <div>
+                <a  class="fw-bold text-primary mb-1">
+                    <h6 style="margin-left:30px;font-size:40px;margin-top:45px">{{userProfile.username}}</h6>
+                    <h6 class="text-muted" style="margin-left:30px;font-size:18px">{{userProfile.email}}</h6>
+                </a>
+                    <div id="profile_footer">
+                    {%if request.user.is_authenticated%}
+                    {%if request.user in userProfile.followers.all %}
+                    <button class="btn btn-outline-primary btn-md" style="margin-left:30px" id="unFollowButton" data-id ={{userProfile.id}}>Un-Follow</button><br />
+                    {%elif request.user != userProfile%}
+                    <button class="btn btn-outline-primary btn-md" style="margin-left:30px" id="followButton" data-id={{userProfile.id}}>Follow</button><br />
+                    {%endif%}
+                    {%endif%}
+                    </div>
+                     <p1 class="mb-0" style="margin-left:30px;font-size:20px;font-weight:bold"><span id="Followers">Followers:{{userProfile.followers.count}}</span><span>   |  </span> <span  id="Following">Following:{{userProfile.following.count}}</span></p1>
+              </div>
+        </div>
+
+</div><hr />
+</div>
+{% endblock profile %}
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

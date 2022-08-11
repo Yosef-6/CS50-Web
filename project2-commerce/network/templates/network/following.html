@@ -1,0 +1,18 @@
+{% extends "network/index.html" %}
+{% load static%}
+
+{% block profile %}
+<div class="row">
+    <div class="card-body">
+        <div class="d-flex flex-start align-items-center">
+            <a  class="fw-bold text-primary mb-1">
+                <h6 style="margin-left:30px;font-size:40px;margin-top:45px">Following Posts</h6>
+            </a>
+        </div>
+    </div><hr />
+</div>
+{% endblock profile %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

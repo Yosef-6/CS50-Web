@@ -1,0 +1,104 @@
+#searchUser, #popularUsers{
+    position: fixed;
+    width: 23%;   
+    border: none !important;
+    background-color: rgb(241, 239, 250);
+    border-radius: 20px;
+    margin-top: 70px;
+}
+@keyframes growy {
+    0%{ 
+        display: "block";
+        opacity: 5%;
+        line-height: 0px;
+    }
+
+    50%{
+        opacity: 100%;
+        line-height: 70px;
+    }
+    100%{
+        opacity:0%;
+        line-height: 0px;
+
+    }
+   
+}
+@keyframes growx {
+    0%{ 
+        transform: scale(0);
+      
+    }
+    100%{
+        
+        transform: scale(1);
+    }
+   
+}
+@keyframes growyEdit {
+    0%{ 
+        height: 0px
+        
+    }
+    100%{
+        
+        height :300px
+        
+    }
+   
+}
+@keyframes shrinkyEdit {
+    0%{ 
+        height: 300px
+        
+    }
+    100%{
+        
+        height :0px
+        
+    }
+   
+}
+#editInput{
+
+    animation-name: growyEdit; /* grow in the y dircetion for edit boxes  */
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+    animation-play-state: running;
+}
+#closeEditInput{
+   
+
+    animation-name: shrinkyEdit; /* grow in the y dircetion for edit boxes  */
+    animation-duration: 1s;
+    animation-fill-mode:forwards;
+    animation-play-state: running;
+ 
+}
+#info{
+ margin-top: 40px;
+ line-height: 0px;
+ animation-name: growy;
+ animation-duration: 3s;
+ animation-fill-mode:forwards;
+ animation-play-state: paused;
+}
+#recentPost{
+    
+    animation-name: growx;
+    animation-duration:2s;
+    animation-fill-mode:forwards;
+    animation-play-state: running;
+}
+#post,#recentPost{
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+svg{
+
+    transition-duration: 500ms;
+  
+  }
+  svg:hover{
+    transform:scale(1.5);
+  }
