@@ -1,0 +1,152 @@
+{% extends "network/layout.html" %}
+{% load static%}
+
+{% block body %}
+
+<div class="container-fluid mt-4">
+    <div class ="row d-flex justify-content-center">
+        <div class="col-3">
+            <div class="card" id="popularUsers">
+                <div class="card-body">
+                  <h5 class="card-title">Popular</h5><hr />
+                 
+                  <div class="mb-4" id="popularUser1">
+                  
+                  </div>
+                  <div class="mb-4" id="popularUser2">
+                    
+  
+                  </div>
+                  <div class="mb-4" id="popularUser3">
+                   
+    
+                  </div>
+                  <div class="mb-4" id="popularUser4">
+                   
+    
+                  </div>
+                  <div class="mb-4" id="popularUser5">
+                   
+    
+                  </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-6 border-left border-right">
+        {%block profile%}
+            <div class ="row">
+            <h1 class="display-5 text-start m-2">All posts</h1>   
+            </div>
+            <div class ="row  m-2 mt-2">
+                <form class="ms-2 p-4" id="form_post">
+                        <h4 class="text-muted"><label for="postInput">New Post</label></h4>
+                        <textarea class="form-control" id="postInput" rows="4" cols="100%"></textarea>
+                        <button type="submit" class="btn btn-primary mt-2">post</button>
+                        
+                </form>
+             </div>
+        {%endblock profile%}
+            <div class="row mt-2  m-2" id="postTab">
+            {% for post in page%}
+                {% if page.number == 1 and forloop.counter == 1%}
+                <div class="col-12 mb-3" id="recentPost" data-post_id={{post.id}}>
+                {%else%}
+                <div class="col-12 mb-3" id="Post" data-post_id={{post.id}}>
+                {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex flex-start align-items-center">
+                            <img class="rounded-circle" src="https://avatars.dicebear.com/api/{{post.author.avatar}}/{{post.author.seed}}.svg" width="70" height="70">
+                              <div>
+                                <a href="{% url 'profile_view' post.author.id %}" class="fw-bold text-primary mb-1">
+                                    <h6 style="margin-left:11px">{{post.author.username}}</h6>
+                                </a>
+                                     <p1 class="text-muted small mb-0" style="margin-left:11px">Shared publicly - {{post.timestamp}}</p1>
+                              </div>
+                        </div>
+                              <div class="mt-3 mb-4 pb-2" style="margin-left:80px;word-wrap: break-word;" data-content_id={{post.id}}>
+                                <p2>{{post.content}}</p2>
+                              </div>
+                              <div class="mt-3 mb-4 pb-2" style="margin-left:80px;word-wrap: break-word;" data-footer_id={{post.id}}>
+                                {% if request.user in post.likes.all%}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                                </svg>
+                                {%else%}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgrey" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                                </svg>
+                                {%endif%}
+                                <span class="text-muted" id="likes" style="margin-left:10px;margin-right:15px;">{{post.likes.count}}</span>
+                                {% if request.user.username  == post.author.username%}
+                                <button class="btn btn-outline btn-sm"><i class="bi bi-pencil-square"></i></button>
+                                {%endif%}
+                              </div>
+                     </div>
+                </div>   
+
+            {%endfor%}
+
+
+
+            </div>
+
+
+
+
+
+            <div class="row mt-2  m-2 p-3" id="pagination">
+            {%if page.has_previous%}
+            <a  class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a  class="btn btn-outline-info mb-4" href="?page={{page.previous_page_number}}">Previous</a>
+            {%endif%}
+            {% for num in page.paginator.page_range%}
+             {%if page.number == num%}
+             <a  class="btn btn-info mb-4" href="?page={{num}}">{{num}}</a>
+            {%elif num > page.number|add:'-3' and num < page.number|add:'3'%}
+            <a  class="btn btn-outline-info mb-4"  href="?page={{num}}">{{num}}</a>
+            {%endif%}
+            {% endfor %}
+            {%if page.has_next%}
+            <a  class="btn btn-outline-info mb-4"   href="?page={{page.next_page_number}}">Next</a>
+            <a  class="btn btn-outline-info mb-4"   href="?page={{page.paginator.num_pages}}">Last</a>
+            {%endif%}
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card" id="searchUser">
+                <div class="card-body">
+                <h5 class="card-title"><input class="form-control" type="text" placeholder="search-user" id="search"></h5><hr />
+                  
+                <div class="mb-4" id="searchUser1">
+                  
+                </div>
+                <div class="mb-4" id="searchUser2">
+                  
+
+                </div>
+                <div class="mb-4" id="searchUser3">
+                 
+  
+                </div>
+                <div class="mb-4" id="searchUser4">
+                 
+  
+                </div>
+                <div class="mb-4" id="searchUser5">
+                 
+  
+                </div>
+
+
+
+
+                </div>
+            </div> 
+         </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

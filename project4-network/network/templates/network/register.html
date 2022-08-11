@@ -1,0 +1,45 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+<div class="container-lg">
+    <h2>Register</h2>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control form-select-lg" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select avatar type</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="avatar">
+              <option>male</option>
+              <option>female</option>
+              <option>human</option>
+              <option>identicon</option>
+              <option>bottts</option>
+              <option>avataaars</option>
+              <option>jdenticon</option>
+              <option>gridy</option>
+              <option>micah</option>
+            </select>
+          </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+</div>
+{% endblock %}
