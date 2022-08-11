@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News Archive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'NewsArchive/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-lg">
+        <a class="navbar-brand" href="#"><span id="brand">News Archiver</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto ms-2">
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'index' %}">Home</a>
+              </li>
+              {%block nav_items%}
+              <li class="nav-item">
+                <a class="nav-link " href="#about-me">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#services">Services</a>
+              </li>
+              {%endblock nav_items%}
+              {% if  request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url "dashboard_view" %}">{{request.user.username}}</a>
+              </li>
+              {%endif%}
+            </ul>
+          
+          
+          {% if  request.user.is_authenticated %}
+         
+          <a href="{% url 'logout' %}"><button  type="submit">Log out</button></a>
+          {% else %}
+          <a href="{% url 'login' %}"><button  type="submit">Log in</button></a>
+          <a href="{% url 'register' %}"><button  type="submit">Sign up</button></a>
+          {% endif%} 
+
+
+          
+        </div>
+      </div>
+    </nav>
+  <div class = 'alert alert-success' id="infoTab"></div>
+{%block body%}
+ <div class="container-fluid" id="hero">
+ <div class="container-lg">
+  <div class="row">
+    <div class="col-md-6" id="hero_discription">
+      <div class="">
+        <h1>Get your news from multiple sources. 
+            find out a days headlines with a click
+        </h1>
+        <p>Sign up today and get started</p>
+      </div>
+    </div>
+    <div class="col-md-6" id="hero_image">
+      <div>
+          <img src="" class="rounded width-100%" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<section id="services" class="services section-bg">
+  <div class="container-lg" id="services">
+
+    <div class="section-title">
+      <h2>Services</h2>
+      <hr/>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-3 col-md-6 d-flex align-item" >
+        <div class="icon-box">
+          <div class="icon"><i class="bi bi-clipboard2-data"></i></div>
+          <h4><a href="{% url 'register' %}">Data agreegation</a></h4>
+          <p>Aggregates data each day after configuration. The best part is u dont have to be here</p>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bi bi-cloud-download"></i></div>
+          <h4><a href="{% url 'register' %}">Download data</a></h4>
+          <p>Export the data that u have aggregated of any month of your liking. The system works on top of the news api </p>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6  d-flex align-items-stretch mt-4 mt-xl-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bi bi-newspaper"></i></div>
+          <h4><a href="{% url 'register' %}">Check ur News</a></h4>
+          <p>Check the news like no other. Check ur favourites staions headlines all in one BBC,CNN.... </p>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6 col-sm-12 d-flex align-items-stretch mt-4 mt-xl-0">
+        <div class="icon-box">
+          <div class="icon"><i class="bi bi-sliders"></i></div>
+          <h4><a href="{% url 'register' %}">Configurable</a></h4>
+          <p>Configure news aggregator to ur liking.Greatly configurable to suit ur needs sighn up today!</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<section id="about-me">
+<div class="container">
+  <div class="section-title">
+    <h2>About me</h2>
+  </div>
+  <hr />
+
+  <div class="row content" id="row_content">
+    <div class="col-lg-6">
+      <p id="about_name">
+        My name is Yosef sirak 
+      </p>
+      <ul>
+        <li><i class="bi bi-chevron-double-right"></i>intermidiate c++ programmer</li>
+        <li><i class="bi bi-chevron-double-right"></i>Beginner web developer has experiance with django framework</li>
+        <li><i class="bi bi-chevron-double-right"></i>Contact Me <a href = "mailto:yosef6@gmail.com">Send Email</a></li>
+      </ul>
+    </div>
+    <div class="col-lg-6 pt-4 pt-lg-0">
+      <p>
+       My name is yosef sirak am currently learning at Addis Ababa institute of technology (AAit) school of electrical engineering, computer engineering department.
+       This is my final project for cs50 web programming with python and javascript
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+{%endblock body%}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    {% block script %}
+    
+    {% endblock %}
+   
+  </body>
+</html>
