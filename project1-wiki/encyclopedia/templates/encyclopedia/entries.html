@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title%}
+{{title}}
+{%endblock title%}
+
+{%block body%}
+{% if editable %}
+<div >
+  <form id={{ title }} action="{% url 'existEntry' title %}"></form>
+  <button type="submit" class="btn btn-default btn-sm" form={{title}}>
+   <i class="bi bi-pen-fill"></i> Edit
+ </button>
+</div>
+{% endif %}
+{% autoescape off %}
+  {{info}}
+{% endautoescape %}
+
+{%endblock body%}

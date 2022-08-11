@@ -1,0 +1,36 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="display-4">{{searchInfo}}</h1>
+
+    <ol>
+        {% for entry,lastMod,entryState in info %}
+        {% if entryState %}
+ <div class="alert alert-success" role="alert">
+        {%else %}
+     <div class="alert alert-danger" role="alert">
+         {%endif%}    
+ <div class="row">
+         <div class="col">
+             <a  href="{% url 'entryView' entry %}">{{ entry }} </a> 
+         </div>
+         <div class="col">
+            <span>Last modified : {{lastMod}}, Size {{entryState}} bytes   </i></span>
+          </div>
+        <div class="col">
+               <form id={{ entry }} action="{% url 'existEntry' entry %}"></form>
+               <button type="submit" class="btn btn-default btn-sm" form={{entry}}>
+                <i class="bi bi-pen-fill"></i> Edit
+              </button>
+        </div>
+</div>
+  </div>
+        {% endfor %}
+        
+    </ol>
+
+{% endblock %}

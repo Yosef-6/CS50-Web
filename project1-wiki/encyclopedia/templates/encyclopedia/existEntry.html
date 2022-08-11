@@ -1,0 +1,28 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title%}
+{{title}}
+{%endblock title%}
+
+{%block body%}
+    <h1 class="display-4 " >{{title}}</h1>
+    <div class="row justify-content-center my-5" >
+       <div class="col-lg-10 form-group" > 
+        <form acttion = "{% url 'existEntry' 'submit' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}} 
+        {% if Error == 1 %}
+        <div class="alert alert-danger mt-0 " role="alert">
+            <i class="bi bi-x-circle-fill"></i> Entry name changed!!
+        </div>
+        {% endif %}
+        <div class="mt-4 text-center">
+        <button type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+
+        </form>
+
+       </div>
+         
+    </div> 
+{%endblock body%}
